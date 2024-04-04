@@ -1,4 +1,13 @@
 from django.db import models
+from django.core.validators import MaxValueValidator
+
+class User(models.Model):
+    user_id = models.AutoField(primary_key=True, null=False, validators=[MaxValueValidator(99999999999)])
+    username = models.CharField(max_length=50, null=False)
+    password = models.CharField(max_length=255, null=False)
+    first_name = models.CharField(max_length=50, null=True)
+    last_name = models.CharField(max_length=50, null=True)
+    email = models.CharField(max_length=100, null=True)
 
 class Award(models.Model):
     name = models.CharField(max_length=100)
