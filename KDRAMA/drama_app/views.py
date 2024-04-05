@@ -3,7 +3,7 @@ from django.urls import reverse
 from .models import Award, Character, Director, Drama, Actor
 from django.views import View
 from .forms import DirectorForm, DramaForm, ActorForm, AwardForm, CharacterForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate #login
 from django.contrib import messages
 
 
@@ -28,7 +28,7 @@ class DirectorList(View):
         director = Director.objects.all()
         return render(request=request, template_name='Drama/director_list.html',context={'director':director})
 
-#class LoginView(View):
+'''class LoginView(View):
     def get(self, request):
         return render(request, template_name='homepage')
 
@@ -42,7 +42,7 @@ class DirectorList(View):
             return redirect('homepage')  
         else:
             messages.error(request, 'Invalid username or password')
-            return redirect('login')
+            return redirect('login')'''
 
 class HomepageView(View):
     def get(self, request):
