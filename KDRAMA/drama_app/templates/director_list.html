@@ -1,0 +1,13 @@
+<html>
+    <title>Director List</title>
+    <head>
+        <body>
+            <h1>Director List</h1>
+            <u>
+                {% for Director in Directors %}
+                <li>{{ Director.first_name, Director.last_name }}</li>
+                {% endfor %}
+            </u>
+        </body>
+    </head>
+</html>

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from .models import Award, Character, Director, Drama, Actor
+from .models import Award, Character, Director, Drama, Actor, User
 from django.views import View
 from .forms import DirectorForm, DramaForm, ActorForm, AwardForm, CharacterForm
 from django.contrib.auth import authenticate #login
@@ -11,24 +11,24 @@ from django.contrib import messages
 class DramaList(View):
     def get(self,request):
         drama = Drama.objects.all()
-        return render(request=request, template_name='Drama/drama_list.html',context={'drama':drama})
+        return render(request=request, template_name='drama/drama_list.html',context={'drama':drama})
 
 class DramaDetails(View):
     def get(self,request,id):
         drama = Drama.objects.get(pk=id)
-        return render(request=request, template_name='Drama/drama_detail.html',context={'drama':drama})
+        return render(request=request, template_name='drama/drama_detail.html',context={'drama':drama})
 
 class ActorList(View):
     def get(self,request):
         actor = Actor.objects.all()
-        return render(request=request, template_name='Drama/actor_list.html',context={'actor':actor})
+        return render(request=request, template_name='drama/actor_list.html',context={'actor':actor})
 
 class DirectorList(View):
     def get(self,request):
         director = Director.objects.all()
-        return render(request=request, template_name='Drama/director_list.html',context={'director':director})
+        return render(request=request, template_name='drama/director_list.html',context={'director':director})
 
-'''class LoginView(View):
+#class LoginView(View):
     def get(self, request):
         return render(request, template_name='homepage')
 
@@ -46,4 +46,53 @@ class DirectorList(View):
 
 class HomepageView(View):
     def get(self, request):
+        return render(request, 'homepage.html')
+    
+############################
+# CRUD Operations for User #
+############################
+class UserAdd(View):
+    def get(self,request):
+
+        user = User.objects.all()
+
+        return redirect('login')
+
+class UserUpdate(View):
+
+    def get(self,request,user_id=None):
+        if user_id:
+            user = User.objects.get(pk=user_id)
+        else:
+            user = User()
+
+        return render(request, 'homepage.html')
+    
+    def post(self,request,user_id=None):
+
+        if user_id:
+            user = User.objects.get(pk=user_id)
+        else:
+            user = User()
+        
+        return render(request, 'homepage.html')
+    
+class UserDelete(View):
+
+    def get(self,request,user_id=None):
+
+        if user_id:
+            user = User.objects.get(pk=user_id)
+        else:
+            user = User()
+
+        return render(request, 'homepage.html')
+      
+    
+    def post(self,request,user_id=None):
+
+        user = User.objects.get(pk=user_id)
+
+        user.delete()
+
         return render(request, 'homepage.html')
