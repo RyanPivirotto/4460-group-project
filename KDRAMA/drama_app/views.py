@@ -5,15 +5,20 @@ from django.views import View
 from .forms import DirectorForm, DramaForm, ActorForm, AwardForm, CharacterForm
 from django.contrib.auth import authenticate #login
 from django.contrib import messages
+from .serializers import DramaSerializer 
+from rest_framework import generics
 
 
 # Create your views here.
-class DramaList(View):
+        
+class DramaList(generics.ListCreateAPIView):
+    serializer_class = DramaSerializer
     def get(self,request):
         drama = Drama.objects.all()
         return render(request=request, template_name='drama/drama_list.html',context={'drama':drama})
-
-class DramaDetails(View):
+     
+class DramaDetails(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = DramaSerializer
     def get(self,request,id):
         drama = Drama.objects.get(pk=id)
         return render(request=request, template_name='drama/drama_detail.html',context={'drama':drama})
