@@ -28,7 +28,7 @@ class DirectorList(View):
         director = Director.objects.all()
         return render(request=request, template_name='drama/director_list.html',context={'director':director})
 
-#class LoginView(View):
+class LoginView(View):
     def get(self, request):
         return render(request, template_name='homepage')
 
@@ -42,7 +42,7 @@ class DirectorList(View):
             return redirect('homepage')  
         else:
             messages.error(request, 'Invalid username or password')
-            return redirect('login')'''
+            return redirect('login')
 
 class HomepageView(View):
     def get(self, request):
