@@ -3,7 +3,7 @@ from django.urls import reverse
 from .models import Award, Character, Director, Drama, Actor, User
 from django.views import View
 from .forms import DirectorForm, DramaForm, ActorForm, AwardForm, CharacterForm
-from django.contrib.auth import authenticate #login
+from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from .serializers import DramaSerializer 
 from rest_framework import generics
