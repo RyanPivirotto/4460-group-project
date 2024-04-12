@@ -119,9 +119,14 @@ class ActorUpdate(View):
         return render(request, 'actor_update.html', {'form': form, 'actor': actor})
     
 class ActorDelete(View):
-    model = Actor
-    success_url = reverse_lazy('actor-list') 
-    template_name = 'actor_delete.html'
+    def get(self, request, id):
+        actor = get_object_or_404(Actor, id=id)
+        return render(request, 'actor_delete.html', {'actor': actor})
+
+    def post(self, request, id):        
+        actor = get_object_or_404(Actor, id=id)        
+        actor.delete()        
+        return redirect('actor-list')
 
 ############################
 # CRUD Operations for User #

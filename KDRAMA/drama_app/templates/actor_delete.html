@@ -4,7 +4,11 @@
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     </head>
 <body>
-    Actor Delete:<br>
+    Are you sure you want to delete the following actor?<br>
+    <ul>
+        <li><strong>ID:</strong> {{ actor.id }}</li>
+        <li><strong>Name:</strong> {{ actor.first_name }} {{ actor.last_name }}</li>
+    </ul>
    <form method="post" class="form">
    
     {% csrf_token %}
