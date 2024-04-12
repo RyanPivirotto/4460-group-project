@@ -93,7 +93,16 @@ class DramaEdit(View):
 class ActorAdd(View):
     def get(self, request):
         form = ActorForm()
-        return render(request=request, template_name='actor_add.html', context={'form': form})
+        return render(request, 'actor_add.html', {'form': form})
+
+    def post(self, request):
+        form = ActorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            
+            return redirect('actor-list')
+        else:
+            return render(request, 'actor_add.html', {'form': form})
 
 class ActorUpdate(View):
     def get(self, request, id):
