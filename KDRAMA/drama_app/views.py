@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from .models import Award, Character, Director, Drama, Actor, User
 from django.views import View
-from .forms import DirectorForm, DramaForm, ActorForm, AwardForm, CharacterForm
+from .forms import DirectorForm, DramaForm, ActorForm, AwardForm, CharacterForm, LoginForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from .serializers import DramaSerializer 
@@ -32,25 +32,24 @@ class DirectorList(View):
         directors = Director.objects.all()
         return render(request=request, template_name='director_list.html',context={'directors':directors})
 
-class LoginView(View):
-    def get(self, request):
-        return render(request, template_name='homepage')
-
-    def post(self, request):
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-
-        if user is not None:
-            login(request, user)
-            return redirect('homepage')  
-        else:
-            messages.error(request, 'Invalid username or password')
-            return redirect('login')
-
 class HomepageView(View):
     def get(self, request):
-        return render(request, 'homepage.html')
+        form = LoginForm()
+        return render(request, 'homepage.html', {'form':form})
+    
+    def post(self, request):
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('homepage')
+            else:
+                return render(request, 'homepage.html', {'form': form, 'login_failed': True})
+        else:
+            return render(request, 'homepage.html', {'form': form})
     
 ##############################
 # CRUD Operations for KDRAMA #
@@ -160,3 +159,23 @@ class UserDelete(View):
         user.delete()
 
         return render(request, 'homepage.html')
+    
+##################
+# LOGIN##
+#################
+
+class LoginView(View):
+    def get(self, request):
+        form = LoginForm()
+        return render(request, 'login.html', {'form': form})
+
+    def post(self, request):
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('homepage')
+        return render(request, 'login.html', {'form': form})

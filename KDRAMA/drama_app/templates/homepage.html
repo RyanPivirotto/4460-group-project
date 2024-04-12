@@ -33,12 +33,28 @@
             border-radius: 5px;
             background-color: #f0f0f0;
         }
+        .login-form {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="login-form">
+            {% if user.is_authenticated %}
+                <p>Login successful</p>
+            {% else %}
+                <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="username" placeholder="Username">
+                    <input type="password" name="password" placeholder="Password">
+                    <button type="submit">Login</button>
+                </form>
+            {% endif %}
+        </div>
         <h1>KDRAMA</h1>
-        <h2>!!!DRAMA TITLE!!!</h2>
         <div class="homepage-links">
             <a href="{% url 'drama-list' %}">Drama List</a>
             <a href="{% url 'actor-list' %}">Actor List</a>
