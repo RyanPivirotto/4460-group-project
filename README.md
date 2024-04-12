@@ -33,3 +33,6 @@ Nicholas Williams - 4/11/24
 
 - **More Data**: While there is data in our application, there
 still needs a lot more data to fully integrate all the models to thier full potential.
+
+- **Links and Logins**: Added links in several tempaltes to route back to relevant pages AND back to the homepage.
+e.g.(drama details link back to drama list, Add Actor back to actor list, and so forth)
