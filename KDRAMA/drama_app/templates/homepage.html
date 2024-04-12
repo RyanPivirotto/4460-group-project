@@ -40,9 +40,10 @@
         <h1>KDRAMA</h1>
         <h2>!!!DRAMA TITLE!!!</h2>
         <div class="homepage-links">
-            <a href="drama_list.html">Drama List</a>
-            <a href="actor_list.html">Actor List</a>
-            <a href="director_list.html">Director List</a>
+            <a href="{% url 'drama-list' %}">Drama List</a>
+            <a href="{% url 'actor-list' %}">Actor List</a>
+            <a href="{% url 'director-list' %}">Director List</a>
+            <a href="{% url 'drama-add' %}">Add New Drama</a>
         </div>
     </div>
 </body>

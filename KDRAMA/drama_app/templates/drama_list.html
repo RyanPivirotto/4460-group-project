@@ -1,7 +1,18 @@
+<!DOCTYPE html>
 <html>
+<head>
     <title>Drama List</title>
-    <head>
-        <body>
-        </body>
-    </head>
+</head>
+<body>
+    <ul>
+        {% for drama in dramas %}
+        <li>
+            <a href="{% url 'drama-details' id=drama.id %}">{{ drama.title }}</a>
+        </li>
+        {% empty %}
+        <li>No dramas available</li>
+        {% endfor %}
+    </ul>
+</body>
 </html>
+
