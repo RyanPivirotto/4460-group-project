@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Award List</title>
+</head>
+<body>
+    <h1>Award List</h1>
+    <ul>
+        {% for award in awards %}
+        <li>
+            <ul>
+                <li>Name: {{ award.name }}</li>
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
