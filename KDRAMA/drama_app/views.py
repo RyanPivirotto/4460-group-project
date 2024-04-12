@@ -96,15 +96,18 @@ class ActorAdd(View):
         return render(request=request, template_name='actor_add.html', context={'form': form})
 
 class ActorUpdate(View):
-    model = Actor
-    form_class = ActorForm
-    template_name = 'actor_update.html'  
-    success_url = reverse_lazy('actor-list') 
+    def get(self, request, id):
+        actor = Actor.objects.get(id=id)
+        form = ActorForm(instance=actor)
+        return render(request, 'actor_update.html', {'form': form, 'actor': actor})
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['action'] = 'Update Actor'
-        return context
+    def post(self, request, id):
+        actor = Actor.objects.get(id=id)
+        form = ActorForm(request.POST, instance=actor)
+        if form.is_valid():
+            form.save()
+            return redirect('actor-list')
+        return render(request, 'actor_update.html', {'form': form, 'actor': actor})
     
 class ActorDelete(View):
     model = Actor

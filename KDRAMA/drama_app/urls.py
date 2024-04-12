@@ -14,5 +14,4 @@ urlpatterns = [
     path('actor/<int:id>/delete/', ActorDelete.as_view(), name='actor-delete'),
     path('homepage/', HomepageView.as_view(), name = 'homepage'),
     path('login/', LoginView.as_view(), name='login'),
-    # Add more URL patterns for other views if needed
 ]
