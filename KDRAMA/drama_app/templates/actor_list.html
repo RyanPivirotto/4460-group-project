@@ -1,13 +1,23 @@
+<!DOCTYPE html>
 <html>
+<head>
     <title>Actor List</title>
-    <head>
-        <body>
-            <h1>Actor List</h1>
+</head>
+<body>
+    <h1>Actor List</h1>
+    <ul>
+        {% for actor in actors %}
+        <li>
             <ul>
-                {% for actor in actors %}
-                <li>{{ actor.first_name, actor.last_name }}</li>
-                {% endfor %}
+                <li>First Name: {{ actor.first_name }}</li>
+                <li>Last Name: {{ actor.last_name }}</li>
+                <li>DOB: {{ actor.date_of_birth }}</li>
+                <li><a href="{% url 'actor-update' actor.id %}">Update Actor</a></li>
+                <li><a href="{% url 'actor-delete' actor.id %}">Delete Actor</a></li>
             </ul>
-        </body>
-    </head>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'actor-add' %}">Add New Actor</a>
+</body>
 </html>
