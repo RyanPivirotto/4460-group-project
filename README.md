@@ -38,3 +38,5 @@ still needs a lot more data to fully integrate all the models to thier full pote
 e.g.(drama details link back to drama list, Add Actor back to actor list, and so forth)
 
 - **Corrected links** Corrected the links for the actor_update.html, actor_delete.html, and actor_add.html
+
+- **STYLIN** Added a uniformed styling to all pages that are accessible
