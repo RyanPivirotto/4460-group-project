@@ -2,17 +2,59 @@
 <html>
 <head>
     <title>Director List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            text-align: center; /* Center align the text content of the body */
+        }
+        h1 {
+            color: #333;
+            margin-top: 50px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px auto;
+            max-width: 600px;
+            text-align: left;
+        }
+        li {
+            background-color: #fff;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <h1>Director List</h1>
     <ul> 
         {% for director in directors %}
-        <li>First Name: {{ director.first_name }}</li>
-        <li>Last Name: {{ director.last_name }}</li>
-        <li>DOB: {{ director.date_of_birth }}</li>
+        <li>
+            <ul>
+                <li>First Name: {{ director.first_name }}</li>
+                <li>Last Name: {{ director.last_name }}</li>
+                <li>DOB: {{ director.date_of_birth }}</li>
+            </ul>
+        </li>
         {% endfor %}
     </ul>
     <br>
     <a href="{% url 'homepage' %}">Back to Homepage</a>
+    <br>
+    
 </body>
+<br>
+<br>
 </html>

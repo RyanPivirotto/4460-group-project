@@ -3,18 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add ACTOR</title>
+    <title>Drama Update</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f2f2f2;
             margin: 0;
             padding: 0;
-            text-align: center;
-        }
-        h1 {
-            color: #333;
-            margin-top: 50px;
+            text-align: center; /* Center align the text content of the body */
         }
         form {
             max-width: 400px;
@@ -24,39 +20,26 @@
             padding: 20px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        button[type="submit"] {
+        input[type="submit"] {
             background-color: #007bff;
             color: #fff;
             border: none;
             border-radius: 5px;
-            padding: 8px 16px; /* Adjusted padding */
+            padding: 10px 20px;
             cursor: pointer;
-            font-size: 16px;
-            margin-top: 20px;
-            display: inline-block;
-            text-decoration: none;
+            transition: background-color 0.3s ease;
         }
-        button[type="submit"]:hover {
+        input[type="submit"]:hover {
             background-color: #0056b3;
-        }
-        a {
-            color: #007bff;
-            text-decoration: none;
-            display: block;
-            margin-top: 20px;
-        }
-        a:hover {
-            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <h1>Add Actor</h1>
+    <h1>Drama Update</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Add Actor</button>
+        <input type="submit" value="Update">
     </form>
-    <a href="{% url 'actor-list' %}">Back to Actor List</a>
 </body>
 </html>

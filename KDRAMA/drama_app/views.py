@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
-from .models import Award, Character, Director, Drama, Actor, User
+from .models import Award, Director, Drama, Actor, User
 from django.views import View
 from .forms import DirectorForm, DramaForm, ActorForm, AwardForm, CharacterForm, LoginForm
 from django.contrib.auth import authenticate, login
@@ -50,6 +50,7 @@ class HomepageView(View):
                 return render(request, 'homepage.html', {'form': form, 'login_failed': True})
         else:
             return render(request, 'homepage.html', {'form': form})
+
     
 ##############################
 # CRUD Operations for KDRAMA #
@@ -77,15 +78,18 @@ class DramaDelete(View):
         return render(reverse('drama-detail'))
 
 class DramaEdit(View):
-    model = Drama
-    form_class = DramaForm
-    template_name = 'drama_edit.html'  # Name your template appropriately
-    success_url = reverse_lazy('drama-list')  # Redirect to the drama list page after a successful update
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['action'] = 'Edit Drama'
-        return context
+    def get(self, request, id):
+        drama = get_object_or_404(Drama, id=id)
+        form = DramaForm(instance=drama)
+        return render(request, 'drama_edit.html', {'form': form, 'drama': drama})
+    
+    def post(self, request, id):
+        drama = get_object_or_404(Drama, id=id)
+        form = DramaForm(request.POST, instance=drama)
+        if form.is_valid():
+            form.save()
+            return redirect('drama-list')
+        return render(request, 'drama_edit.html', {'form': form, 'drama': drama})
 
 #############################
 # CRUD Operations for Actor #
@@ -196,3 +200,49 @@ class LoginView(View):
                 login(request, user)
                 return redirect('homepage')
         return render(request, 'homepage.html', {'form': form})
+    
+#########
+# AWARD CRUDS#
+########
+class AwardList(View):
+    def get(self, request):
+        awards = Award.objects.all()
+        return render(request, 'award_list.html', {'awards':awards})
+
+class AwardAdd(View):
+    def get(self, request):
+        form = AwardForm()
+        return render(request, 'award_add.html', {'form': form})
+
+    def post(self, request):
+        form = AwardForm(request.POST)
+        if form.is_valid():
+            form.save()
+            
+            return redirect('award-list')
+        else:
+            return render(request, 'award_add.html', {'form': form})
+
+class AwardUpdate(View):
+    def get(self, request, id):
+        award = Award.objects.get(id=id)
+        form = AwardForm(instance=award)
+        return render(request, 'award_update.html', {'form': form, 'award': award})
+
+    def post(self, request, id):
+        award = Award.objects.get(id=id)
+        form = AwardForm(request.POST, instance=award)
+        if form.is_valid():
+            form.save()
+            return redirect('award-list')
+        return render(request, 'award_update.html', {'form': form, 'award': award})
+    
+class AwardDelete(View):
+    def get(self, request, id):
+        award = get_object_or_404(award, id=id)
+        return render(request, 'award_delete.html', {'award': award})
+
+    def post(self, request, id):        
+        award = get_object_or_404(award, id=id)        
+        award.delete()        
+        return redirect('award-list')
