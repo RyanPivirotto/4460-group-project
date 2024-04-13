@@ -49,8 +49,20 @@
         <li>Start Date: {{ drama.start_date }}</li>
         <li>Director: {{ drama.director }}</li>
         <li>Seasons: {{ drama.seasons }}</li>
-        <li>Characters: {{ drama.characters }}</li>
-        <li>Actors: {{ drama.actors }}</li>
+        <li>Characters:
+            <ul>
+                {% for character in drama.characters.all %}
+                    <li>{{ character.name }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+        <li>Actors:
+            <ul>
+                {% for actor in drama.actors.all %}
+                    <li>{{ actor.first_name }} {{ actor.last_name }}</li>
+                {% endfor %}
+            </ul>
+        </li>
     </ul>
 
     <div class="button-container">

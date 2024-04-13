@@ -6,6 +6,7 @@ In our continuous effort to enhance the functionality and user experience of our
 
 Nicholas Williams - 4/3/24
 Nicholas Williams - 4/11/24
+Ryan Pivirotto -    4/12/24
 
 ### Added Features
 
@@ -40,3 +41,5 @@ e.g.(drama details link back to drama list, Add Actor back to actor list, and so
 - **Corrected links** Corrected the links for the actor_update.html, actor_delete.html, and actor_add.html
 
 - **STYLIN** Added a uniformed styling to all pages that are accessible
+
+- **Fixed character and Actor Error in drama_details.html** Instead of seeing character:none and actor:none, it now has a list of all actors associated with a drama
