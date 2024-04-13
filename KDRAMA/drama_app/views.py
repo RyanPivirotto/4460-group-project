@@ -184,7 +184,7 @@ class UserDelete(View):
 class LoginView(View):
     def get(self, request):
         form = LoginForm()
-        return render(request, 'login.html', {'form': form})
+        return render(request, 'homepage.html', {'form': form})
 
     def post(self, request):
         form = LoginForm(request.POST)
@@ -195,4 +195,4 @@ class LoginView(View):
             if user is not None:
                 login(request, user)
                 return redirect('homepage')
-        return render(request, 'login.html', {'form': form})
+        return render(request, 'homepage.html', {'form': form})
