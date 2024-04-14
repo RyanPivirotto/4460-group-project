@@ -9,7 +9,7 @@ urlpatterns = [
     path('drama/<int:id>/edit', DramaEdit.as_view(), name='drama-edit'),
     path('directors/', DirectorList.as_view(), name='director-list'),
     path('add/', DramaAdd.as_view(), name='drama-add'),
-    path('delete/', DramaDelete.as_view(), name='drama-delete'),
+    path('drama/delete/<int:id>/', DramaDelete.as_view(), name='drama-delete'),
     path('actors/', ActorList.as_view(), name='actor-list'),
     path('actor/add/', ActorAdd.as_view(), name='actor-add'),
     path('actor/<int:id>/update/', ActorUpdate.as_view(), name='actor-update'),
@@ -20,4 +20,5 @@ urlpatterns = [
     #path('awards/add/', AwardAdd.as_view(), name='award-add'),
     #path('award/<int:id>/delete', AwardDelete.as_view(), name='award-delete'),
     #path('award/<int:id>/update', AwardUpdate.as_view(), name='award=update'),
+
 ]

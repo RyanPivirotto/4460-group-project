@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
 from .models import Award, Director, Drama, Actor, User
 from django.views import View
-from .forms import DirectorForm, DramaForm, ActorForm, AwardForm, CharacterForm, LoginForm
+from .forms import DirectorForm, DramaForm, ActorForm, AwardForm, LoginForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from .serializers import DramaSerializer 
@@ -51,7 +51,6 @@ class HomepageView(View):
         else:
             return render(request, 'homepage.html', {'form': form})
 
-    
 ##############################
 # CRUD Operations for KDRAMA #
 ##############################
@@ -69,13 +68,15 @@ class DramaAdd(View):
             return render(request=request, template_name='drama_add.html', context={'form': form})
         
 class DramaDelete(View):
+    def get(self, request, id):
+        drama = get_object_or_404(Drama, id=id)
+        return render(request, 'drama_delete.html', {'drama': drama})
+    
     def post(self, request, id):
         drama = get_object_or_404(Drama, id=id)
         drama.delete()
-        return redirect('drama-list')
+        return redirect('drama-list')   
     
-    def get(self, request, id):
-        return render(reverse('drama-detail'))
 
 class DramaEdit(View):
     def get(self, request, id):

@@ -67,7 +67,8 @@
 
     <div class="button-container">
         <a href="{% url 'drama-edit' drama.id %}"><button>Edit Drama</button></a>
-        <a href="{% url 'drama-delete' %}"><button>Delete Drama</button></a>
+        <a href="{% url 'drama-delete' drama.id %}"><button>Delete Drama</button></a>
+    
     </div>
 
     <br>
