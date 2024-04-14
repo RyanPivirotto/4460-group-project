@@ -17,6 +17,7 @@ urlpatterns = [
     path('homepage/', HomepageView.as_view(), name = 'homepage'),
     path('login/', LoginView.as_view(), name='login'),
     path('awards/', AwardList.as_view(), name='award-list'),
+    path('director')
     #path('awards/add/', AwardAdd.as_view(), name='award-add'),
     #path('award/<int:id>/delete', AwardDelete.as_view(), name='award-delete'),
     #path('award/<int:id>/update', AwardUpdate.as_view(), name='award=update'),
