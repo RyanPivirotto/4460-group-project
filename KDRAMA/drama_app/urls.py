@@ -9,9 +9,9 @@ urlpatterns = [
     path('dramas/<int:id>/', DramaDetails.as_view(), name='drama-details'),
     path('drama/<int:id>/edit', DramaEdit.as_view(), name='drama-edit'),
     path('directors/', DirectorList.as_view(), name='director-list'),
-    path('director/add/', DirectorAdd.as_view(), name='director-add'),
-    path('director/<int:id>/delete/', DirectorDelete.as_view(), name='director-delete'),
-    path('director/<int:id>/update/', DirectorUpdate.as_view(), name='director-update'),
+    path('directors/<int:id>/add/', DirectorAdd.as_view(), name='director-add'),
+    path('directors/<int:id>/delete/', DirectorDelete.as_view(), name='director-delete'),
+    path('directors/<int:id>/update/', DirectorUpdate.as_view(), name='director-update'),
     path('add/', DramaAdd.as_view(), name='drama-add'),
     path('drama/delete/<int:id>/', DramaDelete.as_view(), name='drama-delete'),
     path('actors/', ActorList.as_view(), name='actor-list'),
@@ -21,9 +21,7 @@ urlpatterns = [
     path('homepage/', HomepageView.as_view(), name = 'homepage'),
     path('login/', LoginView.as_view(), name='login'),
     path('awards/', AwardList.as_view(), name='award-list'),
-    path('director')
     #path('awards/add/', AwardAdd.as_view(), name='award-add'),
     #path('award/<int:id>/delete', AwardDelete.as_view(), name='award-delete'),
     #path('award/<int:id>/update', AwardUpdate.as_view(), name='award=update'),
-
 ]

@@ -50,8 +50,8 @@
         </li>
         {% endfor %}
     </ul>
-    <a href="director_add.html"><button>Add New Director</button></a>
-    <a href="director_update.html"><button>Update  Director</button></a>
+    <a href="{% url 'director-add' %}"><button>Add New Director</button></a>
+    <a href="{% url 'director-update' %}"><button>Update Director</button></a>
     <br>
     <a href="{% url 'homepage' %}">Back to Homepage</a>
     <br>
