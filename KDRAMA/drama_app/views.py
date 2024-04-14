@@ -247,3 +247,44 @@ class AwardDelete(View):
         award = get_object_or_404(award, id=id)        
         award.delete()        
         return redirect('award-list')
+    
+    #############################
+# CRUD Operations for Director #
+#############################
+class DirectorAdd(View):
+    def get(self, request):
+        form = DirectorForm()
+        return render(request, 'director_add.html', {'form': form})
+
+    def post(self, request):
+        form = DirectorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            
+            return redirect('director-list')
+        else:
+            return render(request, 'director_add.html', {'form': form})
+
+class DirectorUpdate(View):
+    def get(self, request, id):
+        director = Director.objects.get(id=id)
+        form = DirectorForm(instance=director)
+        return render(request, 'director_update.html', {'form': form, 'director': director})
+
+    def post(self, request, id):
+        director = Director.objects.get(id=id)
+        form = DirectorForm(request.POST, instance=director)
+        if form.is_valid():
+            form.save()
+            return redirect('director-list')
+        return render(request, 'director_update.html', {'form': form, 'director': director})
+    
+class DirectorDelete(View):
+    def get(self, request, id):
+        director = get_object_or_404(Director, id=id)
+        return render(request, 'director_delete.html', {'director': director})
+
+    def post(self, request, id):        
+        director = get_object_or_404(Director, id=id)        
+        director.delete()        
+        return redirect('director-list')
